@@ -15,7 +15,7 @@ void initialize_txt() {
     }
 }
 
-int insert(int id, const char *nome) {
+int insertLine(int id, const char *nome) {
     for (int i = 0; i < total_registros; i++) {
         if (banco[i].id == id)
             return -1; // ID duplicado
@@ -31,7 +31,7 @@ int insert(int id, const char *nome) {
     return -1; // Limite atingido
 }
 
-int delete(int id) {
+int deleteLine(int id) {
     for (int i = 0; i < total_registros; i++) {
         if (banco[i].id == id) {
             banco[i] = banco[total_registros - 1]; // Substitui com o último
@@ -42,7 +42,7 @@ int delete(int id) {
     return -1;
 }
 
-int select(int id, char *nome_out) {
+int selectLine(int id, char *nome_out) {
     for (int i = 0; i < total_registros; i++) {
         if (banco[i].id == id) {
             strcpy(nome_out, banco[i].nome);
@@ -52,7 +52,7 @@ int select(int id, char *nome_out) {
     return -1;
 }
 
-int update(int id, const char *novo_nome) {
+int updateLine(int id, const char *novo_nome) {
     for (int i = 0; i < total_registros; i++) {
         if (banco[i].id == id) {
             strncpy(banco[i].nome, novo_nome, 49);

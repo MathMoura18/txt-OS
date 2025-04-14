@@ -21,24 +21,24 @@ void* process_input(void *arg) {
     pthread_mutex_lock(&mutex_banco); // Protege acesso ao banco
 
     if (sscanf(requisicao, "INSERT id=%d nome=%s", &id, nome) == 2) {
-        if (insert(id, nome) == 0) {
+        if (insertLine(id, nome) == 0) {
             saveChangesInFile();  // <-- só aqui
             sprintf(resposta, "INSERT: OK\n");
         } else
             sprintf(resposta, "INSERT: ERRO (ID duplicado ou limite)\n");
     } else if (sscanf(requisicao, "DELETE id=%d", &id) == 1) {
-        if (delete(id) == 0) {
+        if (deleteLine(id) == 0) {
             saveChangesInFile();  // <-- aqui também
             sprintf(resposta, "DELETE: OK\n");
         } else
             sprintf(resposta, "DELETE: ERRO (não encontrado)\n");
     } else if (sscanf(requisicao, "SELECT id=%d", &id) == 1) {
-        if (select(id, nome) == 0)
+        if (selectLine(id, nome) == 0)
             sprintf(resposta, "SELECT: nome=%s\n", nome);
         else
             sprintf(resposta, "SELECT: ERRO (não encontrado)\n");
     } else if (sscanf(requisicao, "UPDATE id=%d nome=%s", &id, nome) == 2) {
-        if (update(id, nome) == 0) {
+        if (updateLine(id, nome) == 0) {
             saveChangesInFile();  // <-- também aqui
             sprintf(resposta, "UPDATE: OK\n");
         } else

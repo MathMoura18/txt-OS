@@ -14,10 +14,10 @@ extern Registro banco_de_dados[MAX_REGISTROS];
 extern int total_registros;
 
 void initialize_txt();
-int insert(int id, const char *nome);
-int delete(int id);
-int select(int id, char *out_nome);
-int update(int id, const char *novo_nome);
+int insertLine(int id, const char *nome);
+int deleteLine(int id);
+int selectLine(int id, char *out_nome);
+int updateLine(int id, const char *novo_nome);
 void saveChangesInFile();
 
 #endif
