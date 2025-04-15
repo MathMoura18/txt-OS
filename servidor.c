@@ -55,7 +55,7 @@ void* process_input(void *arg) {
 
 int main() {
     initialize_txt();
-    pthread_mutex_init(&mutex_banco, NULL);
+    pthread_mutex_init(&mutex_banco, NULL); // inicializar o uso do pthread
 
     mkfifo(FIFO_PATH, 0666); // Cria FIFO
 
@@ -74,14 +74,14 @@ int main() {
             buffer[bytes_lidos] = '\0'; // Garante string terminada
             char *requisicao = strdup(buffer); // Cópia segura
             pthread_t tid;
-            pthread_create(&tid, NULL, process_input, requisicao);
-            pthread_detach(tid);
+            pthread_create(&tid, NULL, process_input, requisicao); // anexar thread
+            pthread_detach(tid); // quando o process_input terminar, desanexar thread
         }  
 
         close(fd);
     }
 
-    pthread_mutex_destroy(&mutex_banco);
+    pthread_mutex_destroy(&mutex_banco); // destroi as threads disponibilizadas
     unlink(FIFO_PATH); // Remove FIFO ao final (opcional)
     return 0;
 }
